@@ -50,21 +50,6 @@ jupyter notebook credit_scorecard_fixed.ipynb
 - `data_vars` runs both across every column in the dataset and returns a per-bin detail table plus a per-variable IV summary
 - Variables are ranked by IV to gauge how predictive each one is before being fed into the model
 
-## Fixes from the original version
-
-This notebook was updated to run on current library versions and to correct a few methodology issues found in an earlier draft:
-
-| Issue | Fix |
-|---|---|
-| `DataFrame.append()` — removed in pandas 2.0 | Replaced with `pd.concat()` |
-| `pandas.core.algorithms.quantile` — internal function, no longer exists | Replaced with public `numpy.quantile` |
-| `scipy.stats.stats` — deprecated alias | Replaced with a direct `spearmanr` import |
-| `np.issubdtype(series.dtype, np.number)` — errors on pandas' string dtype | Replaced with `pandas.api.types.is_numeric_dtype` |
-| `groupby('grade').mean()` — errors on non-numeric columns | Restricted to numeric columns |
-| Evaluation run on the full dataset instead of the test set | All metrics (accuracy, confusion matrix, classification report) now consistently use `X_test` / `y_test` |
-| ROC curve bug — both curves accidentally plotted the same `fpr`/`tpr` values | Each model now gets its own named `fpr`/`tpr` pair |
-| Hardcoded local Windows file paths | Replaced with a single configurable `DATA_PATH` constant |
-| Fragile stack-introspection trick to recover the target column's name | Replaced with a plain `Series.name` lookup |
 
 ## License
 
