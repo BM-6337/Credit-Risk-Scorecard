@@ -27,7 +27,7 @@ pip install pandas numpy scipy scikit-learn statsmodels matplotlib seaborn jupyt
 
 ### Run
 
-1. Open `credit_scorecard_fixed.ipynb` in Jupyter
+1. Open `credit_scorecard.ipynb` in Jupyter
 2. Update `DATA_PATH` near the top of the notebook to point at your local `loan.csv`
 3. Run all cells
 
@@ -39,7 +39,7 @@ jupyter notebook credit_scorecard_fixed.ipynb
 
 ```
 .
-├── credit_scorecard_fixed.ipynb   # main notebook — WOE/IV binning, model fitting, evaluation
+├── credit_scorecard.ipynb   # main notebook — WOE/IV binning, model fitting, evaluation
 └── README.md
 ```
 
