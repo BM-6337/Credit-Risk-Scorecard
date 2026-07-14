@@ -170,7 +170,8 @@ Run all notebook cells sequentially to:
 credit-scorecard/
 ├── Credit Scorecard.ipynb     # Complete implementation
 ├── requirements.txt           # Project dependencies
-├── README.md                  
+├── README.md
+└── LICENSE                 
 ```
 
 ---
