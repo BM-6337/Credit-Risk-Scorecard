@@ -151,7 +151,7 @@ pip install -r requirements.txt
 3. Launch Jupyter Notebook.
 
 ```bash
-jupyter notebook "Credit Risk Scorecard.ipynb"
+jupyter notebook "Credit Scorecard.ipynb"
 ```
 
 Run all notebook cells sequentially to:
@@ -170,7 +170,7 @@ Run all notebook cells sequentially to:
 credit-scorecard/
 ├── Credit Scorecard.ipynb     # Complete implementation
 ├── requirements.txt           # Project dependencies
-├── README.md                  # Project documentation
+├── README.md                  
 ```
 
 ---
