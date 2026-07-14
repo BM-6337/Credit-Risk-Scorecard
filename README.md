@@ -1,56 +1,211 @@
-# Credit Scorecard — Lending Club Loan Default Model
+# Credit Risk Scorecard — Loan Default Prediction
 
-A classic credit-risk scorecard built on the [Lending Club loan dataset](https://www.kaggle.com/datasets/wordsforthewise/lending-club). The notebook bins every predictor, computes Weight of Evidence (WOE) and Information Value (IV), transforms variables into their WOE-encoded form, and fits both a logistic regression and a decision tree to predict loan default.
+> **A credit risk modeling project that builds an interpretable credit scorecard using Weight of Evidence (WOE), Information Value (IV), and machine learning to predict loan defaults on the Lending Club dataset.**
 
-## What it does
+Credit risk assessment is one of the most critical applications of machine learning in finance. This project implements a traditional credit scorecard pipeline by combining statistical feature engineering techniques with predictive modeling to estimate the likelihood of loan default.
 
-1. Loads raw Lending Club loan data and keeps only loans with a resolved outcome (`Fully Paid`, `Charged Off`, `Default`)
-2. Engineers a binary target, `Late_Loan` (1 = defaulted, 0 = fully paid)
-3. Drops sparse columns (>10% missing) and any column that leaks the outcome (e.g. `total_pymnt`, `recoveries`) or carries no predictive intuition (e.g. `id`, `url`)
-4. Bins every remaining predictor and computes WOE / IV per bin
-5. Substitutes each raw variable with its WOE-encoded equivalent
-6. Fits a logistic regression and a decision tree on the WOE features
-7. Evaluates both models on a held-out test set — accuracy, confusion matrix, classification report, and ROC curves
+Using the Lending Club loan dataset, the project preprocesses raw loan records, transforms variables using **Weight of Evidence (WOE)** encoding, evaluates their predictive strength with **Information Value (IV)**, and compares the performance of Logistic Regression and Decision Tree models for default prediction.
 
-## Getting started
+---
 
-### Requirements
+## Features
 
-- Python ≥ 3.10
-- The Lending Club `loan.csv` file ([download from Kaggle](https://www.kaggle.com/datasets/wordsforthewise/lending-club))
+- End-to-end credit risk modeling pipeline
+- Binary loan default prediction
+- Automatic feature binning
+- Weight of Evidence (WOE) transformation
+- Information Value (IV) analysis for feature selection
+- Logistic Regression scorecard model
+- Decision Tree classifier
+- ROC curve and classification metric evaluation
+- Interpretable feature engineering for financial applications
 
-### Install dependencies
+---
+
+## Workflow
+
+## Workflow
+
+```mermaid
+flowchart LR
+
+A[Lending Club Dataset]
+A --> B[Preprocessing]
+
+B --> C[Feature Engineering]
+
+C --> D[WOE Encoding]
+
+D --> E[Model Training]
+
+E --> F1[Logistic Regression]
+E --> F2[Decision Tree]
+
+F1 --> G[Evaluation]
+F2 --> G
+
+G --> H[Credit Risk Prediction]
+```
+
+---
+
+## Dataset
+
+The project uses the **Lending Club Loan Dataset**, one of the most widely used datasets for credit risk modeling and loan default prediction.
+
+**Dataset:** https://www.kaggle.com/datasets/wordsforthewise/lending-club
+
+The dataset contains historical loan applications along with borrower attributes and repayment outcomes.
+
+Only loans with resolved statuses are retained:
+
+- Fully Paid
+- Charged Off
+- Default
+
+A binary target variable, **Late_Loan**, is created:
+
+| Value | Description |
+|------:|-------------|
+| 0 | Fully Paid |
+| 1 | Charged Off / Default |
+
+---
+
+## Methodology
+
+### Data Preparation
+
+The preprocessing pipeline includes:
+
+- Removing variables with excessive missing values
+- Eliminating data leakage features
+- Dropping non-predictive identifiers
+- Handling missing values
+- Preparing variables for binning
+
+---
+
+### Feature Engineering
+
+Each predictor is transformed into statistically meaningful representations through:
+
+- Automatic numerical binning
+- Categorical binning
+- Weight of Evidence (WOE) encoding
+- Information Value (IV) computation
+
+These techniques improve model interpretability while preserving predictive power, making them widely adopted in traditional credit scoring.
+
+---
+
+### Predictive Models
+
+Two supervised learning models are implemented and compared.
+
+#### Logistic Regression
+
+A traditional scorecard model commonly used in banking and financial risk assessment due to its interpretability.
+
+#### Decision Tree
+
+A non-linear model capable of capturing complex relationships between borrower characteristics and default risk.
+
+---
+
+## Technologies Used
+
+| Category | Technologies |
+|----------|--------------|
+| Programming Language | Python |
+| Data Processing | Pandas, NumPy |
+| Statistical Analysis | SciPy, StatsModels |
+| Machine Learning | Scikit-learn |
+| Visualization | Matplotlib, Seaborn |
+| Development | Jupyter Notebook |
+
+---
+
+## Installation
+
+Clone the repository.
 
 ```bash
-pip install pandas numpy scipy scikit-learn statsmodels matplotlib seaborn jupyter
+git clone https://github.com/BM-6337/credit-scorecard.git
+
+cd credit-scorecard
 ```
 
-### Run
-
-1. Open `credit_scorecard.ipynb` in Jupyter
-2. Update `DATA_PATH` near the top of the notebook to point at your local `loan.csv`
-3. Run all cells
+Install the required dependencies.
 
 ```bash
-jupyter notebook credit_scorecard_fixed.ipynb
+pip install -r requirements.txt
 ```
 
-## Project structure
+---
 
+## Running the Project
+
+1. Download the **Lending Club loan dataset** from Kaggle.
+2. Update the dataset path in the notebook.
+3. Launch Jupyter Notebook.
+
+```bash
+jupyter notebook "Credit Risk Scorecard.ipynb"
 ```
-.
-├── credit_scorecard.ipynb   # main notebook — WOE/IV binning, model fitting, evaluation
-└── README.md
+
+Run all notebook cells sequentially to:
+
+1. Load the dataset
+2. Clean and preprocess the data
+3. Perform WOE and IV analysis
+4. Train predictive models
+5. Evaluate model performance
+
+---
+
+## Project Structure
+
+```text
+credit-scorecard/
+├── Credit Scorecard.ipynb     # Complete implementation
+├── requirements.txt           # Project dependencies
+├── README.md                  # Project documentation
 ```
 
-## Notes on the WOE/IV pipeline
+---
 
-- `mono_bin` bins numeric predictors into monotonic quantile buckets (falling back to a fixed number of bins if a monotonic relationship can't be found)
-- `char_bin` bins categorical predictors one bucket per category
-- `data_vars` runs both across every column in the dataset and returns a per-bin detail table plus a per-variable IV summary
-- Variables are ranked by IV to gauge how predictive each one is before being fed into the model
+## Model Evaluation
 
+The trained models are evaluated using multiple performance metrics, including:
+
+- Accuracy
+- Confusion Matrix
+- Precision
+- Recall
+- F1 Score
+- ROC Curve
+- Area Under the Curve (AUC)
+
+This enables a comprehensive comparison between Logistic Regression and Decision Tree approaches for credit risk prediction.
+
+---
+
+## Future Improvements
+
+- Hyperparameter optimization
+- Cross-validation pipeline
+- Gradient Boosting (XGBoost / LightGBM)
+- Explainability with SHAP values
+- Interactive dashboard for scorecard visualization
+- Deployment as a REST API
+
+---
 
 ## License
 
-MIT
+This project is licensed under the MIT License.
+
+---
+
+> *Building interpretable machine learning models for smarter credit risk assessment.*
